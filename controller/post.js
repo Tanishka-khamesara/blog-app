@@ -39,9 +39,34 @@ const deletepost = async (req, res) => {
         msg:"delete post"
     })
 }
+// commenting part
+
+const postComments = async (req, res) => {
+    console.log(req.params.postId);
+
+    await postmodel.updateOne({ _id:req.params.postId }, {
+        $push: {
+            comments:req.body,
+        }
+    })
+    res.json({
+        message:"Comment Done",
+    })
+}
+
+const deleteComment = async (req, res) => {
+    await postmodel.updateOne({ _id: req.params.id }, {
+        $pop: {
+            
+        }
+    })
+    res.json({
+        message:"Comment Deleted",
+    })
+}
 
 const postcontrollers = {
-    createnewpost,getSpecificpost,getAllposts,updateapost,deletepost
+    createnewpost,getSpecificpost,getAllposts,updateapost,deletepost,postComments,deleteComment
 }
 
 module.exports=postcontrollers;

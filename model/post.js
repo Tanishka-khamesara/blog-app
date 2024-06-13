@@ -18,7 +18,22 @@ const postdata = new mongoose.Schema({
     userId: {
         type: mongoose.Types.ObjectId,
         ref:"passwordModel"
-    }
+    },
+    comments: [
+        {
+            comment: {
+                type: String,
+            },
+            date: {
+                type: Date,
+                default:new Date(),
+            },
+            userId: {
+                type: mongoose.Schema.Types.ObjectId,
+            }
+        }
+    ]
+    
 },{timestamps:true})
 
 const postmodel = mongoose.model("postmodeel", postdata);
